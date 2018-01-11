@@ -1,11 +1,11 @@
 import sys
 from pyspark import SparkContext, SparkConf
 
-logFile = "s3://r244-bucket/input.txt"
+dataFile = "s3://r244-bucket/input.csv"
 
 conf = SparkConf().setAppName("Spark Wordcount")
-sc = SparkContext("spark://bigdata-vm:7077", "Wordcount", conf=conf)
-textFile = sc.textFile(logFile)
+sc = SparkContext("spark://ip-172-31-30-53.us-west-1.compute.internal:7077", "Wordcount", conf=conf)
+textFile = sc.textFile(dataFile)
 
 wordCounts = textFile.flatMap(lambda line: 
     line.split()).map(lambda word: (word,
